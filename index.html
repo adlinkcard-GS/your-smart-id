@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E2761">
+<title>Your Smart ID - ADLINKCARD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪪</text></svg>">
+<style>
+  html, body { margin: 0; height: 100%; background: #1E2761; overflow: hidden; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #E7EEF6; }
+  #wait {
+    position: fixed; inset: 0; display: grid; place-items: center; z-index: 2;
+    font: 600 18px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff;
+    transition: opacity .3s;
+  }
+  #wait.gone { opacity: 0; pointer-events: none; }
+  .dot { display: inline-block; width: 10px; height: 10px; margin: 0 4px; border-radius: 50%;
+         background: #fff; animation: b 1s infinite alternate; }
+  .dot:nth-child(2) { animation-delay: .2s; } .dot:nth-child(3) { animation-delay: .4s; }
+  @keyframes b { to { opacity: .2; } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+</style>
+</head>
+<body>
+<div id="wait"><div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+<iframe id="app" title="Your Smart ID photo upload" allow="clipboard-write"></iframe>
+<script>
+  /* =========================================================
+     ADLINKCARD - Your Smart ID wrapper (hides the Google banner)
+     Paste YOUR web app link (ends with /exec) between the quotes:
+     ========================================================= */
+  var APP_LINK = "https://script.google.com/macros/s/AKfycbzpFICYpwTEOtRCPHFyCFfYrhspFVnXsGHvxF5Sx9u6OQg3v_dOc7Gz6HXBsOR14b32/exec";
+
+  // ?id=CP001&key=... (photo upload) is passed on
+  var f = document.getElementById("app");
+  f.src = APP_LINK + location.search;
+  f.onload = function () { document.getElementById("wait").className = "gone"; };
+</script>
+</body>
+</html>
